@@ -185,7 +185,7 @@ Imputed data frame for graph and the graph:
 ```r
 activity_imputed_steps_day<-with(activity_impute,aggregate(steps,by=list(date),sum))
 colnames(activity_imputed_steps_day)<-c("date","steps")
-hist(x=activity_imputed_steps_day$steps,xlab="Daily_Steps",main="Daily_Steps_Histogram_(Imputed)")
+hist(x=activity_imputed_steps_day$steps,xlab="Daily Steps",main="Daily Steps Histogram (Imputed)")
 ```
 
 ![plot of chunk unnamed-chunk-16](figure/unnamed-chunk-16-1.png)
@@ -240,9 +240,9 @@ xyplot(steps~interval|activity_week_data$weekday_weekend,
        data=activity_week_data,
        type="l",
        layout=c(1,2),
-       main="Average_Steps_per_Interval_by_Weekend/Weekday",
+       main="Average Steps per Interval by Weekend/Weekday",
        xlab="Interval",
-       ylab="Average_Steps")
+       ylab="Average Steps")
 ```
 
 ![plot of chunk unnamed-chunk-24](figure/unnamed-chunk-24-1.png)

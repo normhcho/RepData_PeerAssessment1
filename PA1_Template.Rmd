@@ -1,6 +1,6 @@
 Peer-graded Assignment: Course Project 1
 ===========================================
-  Loading and preprocessing the data
+Loading and preprocessing the data
 
 Reading the activity .csv file:
   
@@ -100,7 +100,7 @@ Imputed data frame for graph and the graph:
 ```{r}
 activity_imputed_steps_day<-with(activity_impute,aggregate(steps,by=list(date),sum))
 colnames(activity_imputed_steps_day)<-c("date","steps")
-hist(x=activity_imputed_steps_day$steps,xlab="Daily_Steps",main="Daily_Steps_Histogram_(Imputed)")
+hist(x=activity_imputed_steps_day$steps,xlab="Daily Steps",main="Daily Steps Histogram (Imputed)")
 ```
 Mean of the steps with NAs removed:
 ```{r}
@@ -137,6 +137,6 @@ xyplot(steps~interval|activity_week_data$weekday_weekend,
        data=activity_week_data,
        type="l",
        layout=c(1,2),
-       main="Average_Steps_per_Interval_by_Weekend/Weekday",
+       main="Average Steps per Interval by Weekend/Weekday",
        xlab="Interval",
-       ylab="Average_Steps")
+       ylab="Average Steps")
