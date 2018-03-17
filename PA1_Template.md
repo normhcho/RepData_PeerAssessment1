@@ -1,6 +1,11 @@
+---
+output: 
+  html_document: 
+    keep_md: yes
+---
 Peer-graded Assignment: Course Project 1
 ===========================================
-Loading and preprocessing the data
+**Loading and preprocessing the data**
 
 Reading the activity .csv file:
   
@@ -29,7 +34,7 @@ str(activity$date)
 ##  Date[1:17568], format: "2012-10-01" "2012-10-01" "2012-10-01" "2012-10-01" "2012-10-01" ...
 ```
 
-What is mean total number of steps taken per day?
+**What is mean total number of steps taken per day?**
 
 Creating dataframe of daily cumulative steps:
 
@@ -44,7 +49,7 @@ Histogram of the daily cumulative steps:
 hist(activity_steps_day$steps,xlab="Daily_Steps",main="Daily_Steps_Histogram")
 ```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png)
+![](PA1_Template_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
 
 Computing the daily mean of the number of steps:
 
@@ -66,6 +71,8 @@ median(activity_steps_day$steps, na.rm = TRUE)
 ## [1] 10765
 ```
 
+**What is the daily average patterns?**
+
 Setting up average number of step per interval
 
 ```r
@@ -83,7 +90,7 @@ plot(activity_steps_interval$interval,
      main="Average Number of Steps")
 ```
 
-![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8-1.png)
+![](PA1_Template_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
 
 Sorting using arrange to see the highest number of average steps:
 
@@ -127,7 +134,7 @@ max(unlist(activity_steps_interval$steps), na.rm = TRUE)
 ```
 The value matches the value from the first output.
 
-Imputing missing values
+**Imputing missing values**
 
 Counting the number of NAs:
 
@@ -188,7 +195,7 @@ colnames(activity_imputed_steps_day)<-c("date","steps")
 hist(x=activity_imputed_steps_day$steps,xlab="Daily Steps",main="Daily Steps Histogram (Imputed)")
 ```
 
-![plot of chunk unnamed-chunk-16](figure/unnamed-chunk-16-1.png)
+![](PA1_Template_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
 Mean of the steps with NAs removed:
 
 ```r
@@ -207,6 +214,9 @@ median(activity_imputed_steps_day$steps)
 ```
 ## [1] 11015
 ```
+
+**Are there differences in activity patterns between weekdays and weekends?**
+
 Setting up week dataframe:
 
 ```r
@@ -217,12 +227,12 @@ Adding the day of week column:
 ```r
 activity_week$day_of_week <- weekdays(activity$date)
 ```
-Adding the weekday/weekend column:
+Adding the weekday/weekend column based on the day of week value:
 
 ```r
 activity_week$weekday_weekend <- ifelse(activity_week$day_of_week %in% c("Saturday","Sunday"), "Weekend","Weekday")
 ```
-Opening lattice package to enable the request graph:
+Opening lattice package to enable the requested graph:
 
 ```r
 library(lattice)
@@ -233,7 +243,7 @@ Setting up the data for the graph:
 activity_week_data <- aggregate(steps ~ weekday_weekend + interval, activity_week, mean)
 ```
 
-Plot of the data:
+Plot of the data modeling the example that was provided:
 
 ```r
 xyplot(steps~interval|activity_week_data$weekday_weekend,
@@ -245,4 +255,4 @@ xyplot(steps~interval|activity_week_data$weekday_weekend,
        ylab="Average Steps")
 ```
 
-![plot of chunk unnamed-chunk-24](figure/unnamed-chunk-24-1.png)
+![](PA1_Template_files/figure-html/unnamed-chunk-24-1.png)<!-- -->

@@ -1,6 +1,11 @@
+---
+output: 
+  html_document: 
+    keep_md: yes
+---
 Peer-graded Assignment: Course Project 1
 ===========================================
-Loading and preprocessing the data
+**Loading and preprocessing the data**
 
 Reading the activity .csv file:
   
@@ -16,7 +21,7 @@ activity$date <- as.Date(activity$date)
 str(activity$date)
 ```
 
-What is mean total number of steps taken per day?
+**What is mean total number of steps taken per day?**
 
 Creating dataframe of daily cumulative steps:
 ```{r}
@@ -38,6 +43,8 @@ Computing the daily median of the number of steps
 ```{r}
 median(activity_steps_day$steps, na.rm = TRUE)
 ```
+
+**What is the daily average patterns?**
 
 Setting up average number of step per interval
 ```{r}
@@ -66,7 +73,7 @@ max(unlist(activity_steps_interval$steps), na.rm = TRUE)
 ```
 The value matches the value from the first output.
 
-Imputing missing values
+**Imputing missing values**
 
 Counting the number of NAs:
 ```{r}
@@ -110,6 +117,9 @@ Median of the steps with NAs removed:
 ```{r}
 median(activity_imputed_steps_day$steps)
 ```
+
+**Are there differences in activity patterns between weekdays and weekends?**
+
 Setting up week dataframe:
 ```{r}
 activity_week <- activity
@@ -118,11 +128,11 @@ Adding the day of week column:
 ```{r}
 activity_week$day_of_week <- weekdays(activity$date)
 ```
-Adding the weekday/weekend column:
+Adding the weekday/weekend column based on the day of week value:
 ```{r}
 activity_week$weekday_weekend <- ifelse(activity_week$day_of_week %in% c("Saturday","Sunday"), "Weekend","Weekday")
 ```
-Opening lattice package to enable the request graph:
+Opening lattice package to enable the requested graph:
 ```{r}
 library(lattice)
 ```
@@ -131,7 +141,7 @@ Setting up the data for the graph:
 activity_week_data <- aggregate(steps ~ weekday_weekend + interval, activity_week, mean)
 ```
 
-Plot of the data:
+Plot of the data modeling the example that was provided:
 ```{r}
 xyplot(steps~interval|activity_week_data$weekday_weekend,
        data=activity_week_data,
